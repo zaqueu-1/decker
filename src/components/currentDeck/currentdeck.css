@@ -18,6 +18,29 @@
 
 .modal-header {
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.save-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    padding: .3rem .5rem;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background-color: rgb(46, 101, 196);
+    cursor: pointer;
+    color: white;
+    transition: all 0.4s;
+}
+
+.save-btn:hover {
+    background-color: rgb(46, 101, 196, 0.8);
 }
 
 .close-btn {

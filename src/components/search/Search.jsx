@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppConsumer } from '../../contexts/deckContext'
 import axios from 'axios'
 import './search.css'
@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { RxCardStack } from 'react-icons/rx'
 
 function Search() {
+
     const [cardList, setCardList] = useState('')
     const [search, setSearch] = useState('')
 
@@ -23,43 +24,88 @@ function Search() {
     }
 
     const {deck, setDeck} = AppConsumer()
+    const {side, setSide} = AppConsumer()
+    const {myDecks, setMyDecks} = AppConsumer()
 
-    const addToDeck = (amount, index) => {
-        if (deck.filter(card => card.id === cardList.data[index].id)) {
-
+    useEffect(() => {
+        const deck = JSON.parse(localStorage.getItem('deck'))
+        if (deck) {
+            setDeck(deck)
         }
 
-        let newCard = {
-                name: cardList.data[index].name,
-                image: cardList.data[index].image_uris.normal,
-                amount: amount,
-                id: cardList.data[index].id
-            }
-        
-            setDeck([...deck, newCard])
-            console.log(deck)
-    }
+        const side = JSON.parse(localStorage.getItem('side'))
+        if (side) {
+            setSide(side)
+        }
 
-    const {side, setSide} = AppConsumer()
+        const myDecks = JSON.parse(localStorage.getItem('myDecks'))
+        if (myDecks) {
+            setMyDecks(myDecks)
+        }
+    }, [])
+
+    const addToDeck = (amount, index) => {
+        const existingCardIndex = deck.findIndex(card => card.id === cardList.data[index].id)
+
+        if (existingCardIndex >= 0) {
+          const updatedDeck = [...deck]
+          
+          updatedDeck[existingCardIndex] = {
+            ...deck[existingCardIndex],
+            amount: deck[existingCardIndex].amount + amount
+          }
+          setDeck(updatedDeck) 
+          localStorage.setItem('deck', JSON.stringify(updatedDeck))
+        } else {
+          const newCard = {
+            name: cardList.data[index].name,
+            image: cardList.data[index].image_uris.normal,
+            amount: amount,
+            id: cardList.data[index].id
+          }
+            setDeck([...deck, newCard])
+            localStorage.setItem('deck', JSON.stringify([...deck, newCard]))
+        }
+        console.log(deck)
+    }
 
     const addToSide = (amount, index) => {
-        let newCard = {
-                name: cardList.data[index].name,
-                image: cardList.data[index].image_uris.normal,
-                amount: amount,
-                id: cardList.data[index].id
-            }
+        const existingCardIndex = side.findIndex(card => card.id === cardList.data[index].id)
 
+        if (existingCardIndex >= 0) {
+          const updatedSide = [...side]
+          
+          updatedSide[existingCardIndex] = {
+            ...side[existingCardIndex],
+            amount: side[existingCardIndex].amount + amount
+          }
+            setSide(updatedSide) 
+            localStorage.setItem('side', JSON.stringify(updatedSide))
+        } else {
+          const newCard = {
+            name: cardList.data[index].name,
+            image: cardList.data[index].image_uris.normal,
+            amount: amount,
+            id: cardList.data[index].id
+          }
             setSide([...side, newCard])
-            console.log(side)
+            localStorage.setItem('side', JSON.stringify([...side, newCard]))
+        }
+        console.log(side)
     }
-
-
 
     const [deckModal, setDeckModal] = useState(false)
 
     const showDeck = () => {
         (deckModal === false ? setDeckModal(true) : setDeckModal(false))
+    }
+
+    const showMyDecks = () => {
+        const myDecks = JSON.parse(localStorage.getItem('decks'))
+
+        if (myDecks) {
+            setMyDecks(myDecks)
+        }
     }
 
   return (
@@ -70,6 +116,10 @@ function Search() {
             <div onClick={showDeck} className="show-deck-wrapper">
                 <RxCardStack className='show-deck-btn'/>
                 <p className="show-deck-text">Ver Deck</p>
+            </div>
+            <div style={ myDecks.length > 0 ? {display: 'block'} : {display: 'none'} } onClick={showMyDecks} className="show-mydecks-wrapper">
+                <RxCardStack className='show-deck-btn'/>
+                <p className="show-deck-text">Meus Decks</p>
             </div>
         </div>
 
@@ -86,7 +136,6 @@ function Search() {
                 (card.image_uris ?
                     <motion.div initial={{y: 25, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{ duration: 0.6 }} key={index} className="card">
                     <img src={card.image_uris.normal} className='card-img' alt="" />
-                    {card.image_uris ? 
                         <div className='card-controls'>
                             <div className="mainboard-controls" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <p className='sub'>Main</p>
@@ -105,18 +154,12 @@ function Search() {
                                     <button className="add-four-s" onClick={(e) => addToSide(4, index)}>+4</button>
                                 </div>
                             </div>
-                        </div> : null}
+                        </div>
                 </motion.div>
                 : null)
             ))}
 
-
-            {deckModal && (
-                <>
-                    <CurrentDeck showDeck={showDeck}/>
-                </>
-            )}
-
+            {deckModal && <CurrentDeck showDeck={showDeck}/>}
 
         </div>
     </div>

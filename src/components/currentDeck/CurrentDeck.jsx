@@ -13,48 +13,61 @@ function CurrentDeck({showDeck}) {
       const updatedDeck = [...deck];
       const card = updatedDeck[index];
     
-      if (amount === 4) {
-        updatedDeck.splice(index, 1);
-        setDeck(updatedDeck);
-      }
+      card.amount = card.amount - amount;
     
-      if (amount === 1) {
-        card.amount = card.amount - 1;
-    
-        if (card.amount === 0) {
+        if (card.amount <= 0) {
           updatedDeck.splice(index, 1);
         }
     
-        setDeck(updatedDeck);
-      }
+      setDeck(updatedDeck);
+      localStorage.setItem('deck', JSON.stringify(updatedDeck));
     };
 
     const removeFromSide = (amount, index) => {
       const updatedSide = [...side];
       const card = updatedSide[index];
+
+      card.amount = card.amount - amount;
     
-      if (amount === 4) {
-        updatedSide.splice(index, 1);
-        setSide(updatedSide);
-      }
-    
-      if (amount === 1) {
-        card.amount = card.amount - 1;
-    
-        if (card.amount === 0) {
+        if (card.amount <= 0) {
           updatedSide.splice(index, 1);
         }
     
-        setSide(updatedSide);
-      }
+      setSide(updatedSide);
+      localStorage.setItem('side', JSON.stringify(updatedSide));
     };
-    
 
+    const saveDeck = () => {
+      const deckName = prompt('Nome do deck')
+
+      if (deckName) {
+        const deckData = {
+          name: deckName,
+          mainboard: deck,
+          sideboard: side
+        }
+
+        const myDecks = JSON.parse(localStorage.getItem('myDecks')) || []
+
+        myDecks.push(deckData)
+        localStorage.setItem('myDecks', JSON.stringify(myDecks))
+
+        setDeck([])
+        setSide([])
+        localStorage.setItem('deck', JSON.stringify([]))
+        localStorage.setItem('side', JSON.stringify([]))
+      }
+    }
+    
   return (
     <motion.div initial={{x: 100}} animate={{ x: 0 }} transition={{ duration: 0.4 }} className="deck-container">
         <div className="modal-header">
           <AiFillCloseSquare onClick={showDeck} className='close-btn' />
+          {deck.length > 0 && (
+            <button className='save-btn' onClick={saveDeck}>Salvar Deck</button>
+          )}
         </div>
+
         <p className="deck-sub">Mainboard</p>
         {deck.map((card, index) => (
               <motion.div index={index} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
@@ -66,7 +79,6 @@ function CurrentDeck({showDeck}) {
                 </div>
               </motion.div>
           ))}
-
 
         <p className="deck-sub-s">Sideboard</p>
         {side.map((card, index) => (
