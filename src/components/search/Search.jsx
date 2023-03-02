@@ -79,7 +79,7 @@ function Search() {
 
         <div className="card-list">
             {cardList.data && cardList.data.map((card, index) => (
-            <div key={index} className="card">
+            <motion.div initial={{y: 25, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{ duration: 0.6 }} key={index} className="card">
                 <img src={card.image_uris ? card.image_uris.normal : null} className='card-img' alt="" />
                 {card.image_uris ? 
                     <div className='card-controls'>
@@ -101,7 +101,7 @@ function Search() {
                             </div>
                         </div>
                     </div> : null}
-               </div>
+               </motion.div>
             ))}
 
             {deckModal && (
