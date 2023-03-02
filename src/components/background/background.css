@@ -1,0 +1,10 @@
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: brightness(15%);
+    z-index: -1;
+    background: url(https://i.imgur.com/1Z1Z1Z1.jpg) no-repeat center center fixed;
+    background-size: cover;
+}

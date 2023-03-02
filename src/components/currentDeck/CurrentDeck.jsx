@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { AppConsumer } from '../../contexts/deckContext'
 import './currentdeck.css'
+import { motion } from 'framer-motion'
+import { AiFillCloseSquare } from 'react-icons/ai'
 
-function CurrentDeck() {
+function CurrentDeck({showDeck}) {
 
     const {deck, setDeck} = AppConsumer()
+    const {side, setSide} = AppConsumer()
 
     const removeFromDeck = (amount, index) => {
       const updatedDeck = [...deck];
@@ -28,20 +31,35 @@ function CurrentDeck() {
     
 
   return (
-    <div className="deck-container">
+    <motion.div initial={{x: 100}} animate={{ x: 0 }} transition={{ duration: 0.4 }} className="deck-container">
+        <div className="modal-header">
+          <AiFillCloseSquare onClick={showDeck} className='close-btn' />
+        </div>
+        <p className="deck-sub">Mainboard</p>
         {deck.map((card, index) => (
-            <div key={index} className="deck">
-                <div className="card-prev">
-                    <p className='amount'>{card.amount}</p>
-                    <p>{card.name}</p>
-                    <div className="controls">
-                      <button className="remove-one" onClick={(e) => removeFromDeck(1, index)}>-1</button>
-                      <button className="remove-four" onClick={(e) => removeFromDeck(4, index)}>-4</button>
-                    </div>
+              <div index={index} className="card-prev">
+                <p className='amount'>{card.amount}</p>
+                <p>{card.name}</p>
+                <div className="controls">
+                  <button className="remove-one" onClick={(e) => removeFromDeck(1, index)}>-1</button>
+                  <button className="remove-four" onClick={(e) => removeFromDeck(4, index)}>-4</button>
                 </div>
-            </div>
-            ))}
-    </div>
+              </div>
+          ))}
+
+
+        <p className="deck-sub-s">Sideboard</p>
+        {side.map((card, index) => (
+              <div index={index} className="card-prev-s">
+                <p className='amount'>{card.amount}</p>
+                <p>{card.name}</p>
+                <div className="controls">
+                  <button className="remove-one-s" onClick={(e) => removeFromDeck(1, index)}>-1</button>
+                  <button className="remove-four-s" onClick={(e) => removeFromDeck(4, index)}>-4</button>
+                </div>
+              </div>
+          ))}
+    </motion.div>
   )
 }
 

@@ -19,8 +19,8 @@
     outline: none;
     border: 2px solid transparent;
     border-radius: 6px;
-    color:  whitesmoke;
-    background-color: rgba(220, 220, 220, 0.5);
+    color:  rgb(254, 254, 254);
+    background-color: rgba(220, 220, 220, 0.25);
 }
 
 .card-search-button, .show-deck {
@@ -37,17 +37,71 @@
     transition: all 0.4s;
 }
 
-.show-deck {
+.show-deck-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    padding: .5rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.243);
+    transition: all 0.4s;
+}
+
+.show-deck-wrapper:hover {
+    transform: scale(1.03);
+    opacity: 0.8;
+}
+
+.show-deck-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto .2rem;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.show-deck-text {
     background-color: transparent;
+    font-size: .8rem;
+    color: white;
 }
 
 .card-search-button:hover {
     background-color: #b25b04;
 }
 
-.show-deck:hover {
-    transform: scale(1.03);
-    opacity: 0.8;
+.no-deck-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
+.no-deck {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto .2rem;
+    font-size: 1.4rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 45%;
+    padding: 6rem 0;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.no-deck-text {
+    background-color: transparent;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0 4.5rem;
+    color: rgb(202, 202, 202);
 }
 
 .card-list {
@@ -85,12 +139,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin-top: .5rem;
+}
+
+.sub {
+    color:rgba(255, 255, 255, 0.8);
+    margin-bottom: -.4rem;
+}
+
+.divider {
+    height: 45px;
+    margin: 0 .5rem;
+    border-left: 1px solid  #ffffff4a;
 }
 
 .add-one, .add-four {
     padding: .2rem .5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     outline: none;
     border: 2px solid transparent;
     border-radius: 6px;
@@ -103,5 +168,22 @@
 
 .add-one:hover, .add-four:hover {
     background-color: #b25b04;
+}
+
+.add-one-s, .add-four-s {
+    padding: .2rem .5rem;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: white;
+    background-color: #ab9147;
+    margin: .7rem .2rem;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.add-one-s:hover, .add-four-s:hover {
+    background-color:#786532;
 }
 
