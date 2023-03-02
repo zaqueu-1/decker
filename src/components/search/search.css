@@ -1,0 +1,107 @@
+.search-container {
+    width: 100%;
+    padding: 1rem;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    cursor: pointer;
+}
+
+.input-wrapper input {
+    height: 2.5rem;
+    padding: 0 1.5rem;
+    font-size: 1.5rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color:  whitesmoke;
+    background-color: rgba(220, 220, 220, 0.5);
+}
+
+.card-search-button, .show-deck {
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 1.3rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: white;
+    background-color: #EC7500;
+    margin-left: .5rem;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.show-deck {
+    background-color: transparent;
+}
+
+.card-search-button:hover {
+    background-color: #b25b04;
+}
+
+.show-deck:hover {
+    transform: scale(1.03);
+    opacity: 0.8;
+}
+
+.card-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem;
+}
+
+.card-img {
+    width: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.4s;
+    border: 2px solid transparent;
+    border-radius: 14px;
+}
+
+.card-img:hover {
+    transform: scale(1.04);
+}
+
+.card-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.add-one, .add-four {
+    padding: .2rem .5rem;
+    font-size: 1.2rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: white;
+    background-color: #EC7500;
+    margin: .7rem .2rem;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.add-one:hover, .add-four:hover {
+    background-color: #b25b04;
+}
+

@@ -1,0 +1,66 @@
+.deck-container {
+    padding: 0;
+    padding: 1rem;
+    width: 30vw;
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgb(30, 30, 30);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 10px 0 0 10px;
+    border: 2px solid transparent;
+}
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 350px;
+    min-width: 350px;
+    margin: 1rem auto -.5rem;
+}
+
+.card-prev {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 45px;
+    padding: .7rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: #b25b04;
+    margin: 0 auto;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+}
+
+.remove-one, .remove-four {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: .3rem .5rem;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background-color: rgb(236, 117, 0);
+    margin: 0 auto;
+    cursor: pointer;
+    color: white;
+}
