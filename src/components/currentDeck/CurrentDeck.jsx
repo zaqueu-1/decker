@@ -57,27 +57,27 @@ function CurrentDeck({showDeck}) {
         </div>
         <p className="deck-sub">Mainboard</p>
         {deck.map((card, index) => (
-              <div index={index} className="card-prev">
+              <motion.div index={index} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
                 <p>{card.name}</p>
                 <div className="controls">
                   <button className="remove-one" onClick={(e) => removeFromDeck(1, index)}>-1</button>
                   <button className="remove-four" onClick={(e) => removeFromDeck(4, index)}>-4</button>
                 </div>
-              </div>
+              </motion.div>
           ))}
 
 
         <p className="deck-sub-s">Sideboard</p>
         {side.map((card, index) => (
-              <div index={index} className="card-prev-s">
+              <motion.div index={index} className="card-prev-s" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
                 <p>{card.name}</p>
                 <div className="controls">
                   <button className="remove-one-s" onClick={(e) => removeFromSide(1, index)}>-1</button>
                   <button className="remove-four-s" onClick={(e) => removeFromSide(4, index)}>-4</button>
                 </div>
-              </div>
+              </motion.div>
           ))}
     </motion.div>
   )

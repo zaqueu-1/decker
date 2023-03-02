@@ -25,6 +25,10 @@ function Search() {
     const {deck, setDeck} = AppConsumer()
 
     const addToDeck = (amount, index) => {
+        if (deck.filter(card => card.id === cardList.data[index].id)) {
+
+        }
+
         let newCard = {
                 name: cardList.data[index].name,
                 image: cardList.data[index].image_uris.normal,
@@ -79,30 +83,33 @@ function Search() {
 
         <div className="card-list">
             {cardList.data && cardList.data.map((card, index) => (
-            <motion.div initial={{y: 25, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{ duration: 0.6 }} key={index} className="card">
-                <img src={card.image_uris ? card.image_uris.normal : null} className='card-img' alt="" />
-                {card.image_uris ? 
-                    <div className='card-controls'>
-                        <div className="mainboard-controls" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                            <p className='sub'>Main</p>
-                            <div className="mainboard-buttons">
-                                <button className="add-one" onClick={(e) => addToDeck(1, index)}>+1</button>
-                                <button className="add-four" onClick={(e) => addToDeck(4, index)}>+4</button>
+                (card.image_uris ?
+                    <motion.div initial={{y: 25, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{ duration: 0.6 }} key={index} className="card">
+                    <img src={card.image_uris.normal} className='card-img' alt="" />
+                    {card.image_uris ? 
+                        <div className='card-controls'>
+                            <div className="mainboard-controls" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <p className='sub'>Main</p>
+                                <div className="mainboard-buttons">
+                                    <button className="add-one" onClick={(e) => addToDeck(1, index)}>+1</button>
+                                    <button className="add-four" onClick={(e) => addToDeck(4, index)}>+4</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="divider" />
+                            <div className="divider" />
 
-                        <div className="side-controls" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                            <p className='sub'>Side</p>
-                            <div className="side-buttons">
-                                <button className="add-one-s" onClick={(e) => addToSide(1, index)}>+1</button>
-                                <button className="add-four-s" onClick={(e) => addToSide(4, index)}>+4</button>
+                            <div className="side-controls" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <p className='sub'>Side</p>
+                                <div className="side-buttons">
+                                    <button className="add-one-s" onClick={(e) => addToSide(1, index)}>+1</button>
+                                    <button className="add-four-s" onClick={(e) => addToSide(4, index)}>+4</button>
+                                </div>
                             </div>
-                        </div>
-                    </div> : null}
-               </motion.div>
+                        </div> : null}
+                </motion.div>
+                : null)
             ))}
+
 
             {deckModal && (
                 <>
