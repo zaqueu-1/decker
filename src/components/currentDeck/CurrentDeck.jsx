@@ -28,6 +28,26 @@ function CurrentDeck({showDeck}) {
         setDeck(updatedDeck);
       }
     };
+
+    const removeFromSide = (amount, index) => {
+      const updatedSide = [...side];
+      const card = updatedSide[index];
+    
+      if (amount === 4) {
+        updatedSide.splice(index, 1);
+        setSide(updatedSide);
+      }
+    
+      if (amount === 1) {
+        card.amount = card.amount - 1;
+    
+        if (card.amount === 0) {
+          updatedSide.splice(index, 1);
+        }
+    
+        setSide(updatedSide);
+      }
+    };
     
 
   return (
@@ -54,8 +74,8 @@ function CurrentDeck({showDeck}) {
                 <p className='amount'>{card.amount}</p>
                 <p>{card.name}</p>
                 <div className="controls">
-                  <button className="remove-one-s" onClick={(e) => removeFromDeck(1, index)}>-1</button>
-                  <button className="remove-four-s" onClick={(e) => removeFromDeck(4, index)}>-4</button>
+                  <button className="remove-one-s" onClick={(e) => removeFromSide(1, index)}>-1</button>
+                  <button className="remove-four-s" onClick={(e) => removeFromSide(4, index)}>-4</button>
                 </div>
               </div>
           ))}
