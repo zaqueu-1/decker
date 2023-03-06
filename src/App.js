@@ -1,19 +1,22 @@
 import './App.css';
 import React from 'react';
-import Search from './components/search/Search';
-import Header from './components/header/Header';
-import Background from './components/background/Background';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import Home from './pages/Home/Home'
+import Decks from './pages/Decks/Decks'
 
 function App() {
 
   return (
     <>
+    <BrowserRouter>
     <AnimatePresence>
-      <Background />
-      <Header />
-      <Search />
-    </AnimatePresence>
+        <Routes>
+            <Route path="/" element={ <Home/> } />
+            <Route path="decks" element={ <Decks/> } />
+        </Routes>
+      </AnimatePresence>
+    </BrowserRouter>
     </>
   );
 }

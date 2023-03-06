@@ -14,6 +14,11 @@
     border: 2px solid transparent;
     display: flex;
     flex-direction: column;
+    overflow: auto;
+}
+
+.deck-container::-webkit-scrollbar {
+    display: none;
 }
 
 .modal-header {
@@ -80,7 +85,6 @@
     outline: none;
     border: 2px solid transparent;
     border-radius: 12px;
-    background-color: #b25b04;
     margin: 0 auto .25rem;
     color: white;
 }
@@ -98,10 +102,6 @@
 .deck-sub-s {
     background-color: rgba(55, 55, 55);
     margin: 4rem auto .75rem;
-}
-
-.card-prev-s {
-    background-color: #786532;
 }
 
 .controls {
@@ -123,12 +123,23 @@
     outline: none;
     border: 2px solid transparent;
     border-radius: 6px;
-    background-color: rgb(236, 117, 0);
     margin: 0 auto;
     cursor: pointer;
     color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    filter: brightness(90%);
 }
 
-.remove-one-s, .remove-four-s {
-    background-color: #ab9147;
+.amount {
+    font-weight: 700;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: .2rem .5rem;
+    border-radius: 99%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-name {
+    font-style: italic;
 }

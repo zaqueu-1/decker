@@ -3,11 +3,13 @@ import { AppConsumer } from '../../contexts/deckContext'
 import './currentdeck.css'
 import { motion } from 'framer-motion'
 import { AiFillCloseSquare } from 'react-icons/ai'
+import { toast } from 'react-toastify'
 
 function CurrentDeck({showDeck}) {
 
     const {deck, setDeck} = AppConsumer()
     const {side, setSide} = AppConsumer()
+    const {colors} = AppConsumer()
 
     const removeFromDeck = (amount, index) => {
       const updatedDeck = [...deck];
@@ -17,6 +19,7 @@ function CurrentDeck({showDeck}) {
     
         if (card.amount <= 0) {
           updatedDeck.splice(index, 1);
+          toast.error("Card removido!")
         }
     
       setDeck(updatedDeck);
@@ -31,6 +34,7 @@ function CurrentDeck({showDeck}) {
     
         if (card.amount <= 0) {
           updatedSide.splice(index, 1);
+          toast.error("Card removido!")
         }
     
       setSide(updatedSide);
@@ -51,12 +55,44 @@ function CurrentDeck({showDeck}) {
 
         myDecks.push(deckData)
         localStorage.setItem('myDecks', JSON.stringify(myDecks))
+        toast.success('Deck salvo com sucesso!')
 
         setDeck([])
         setSide([])
         localStorage.setItem('deck', JSON.stringify([]))
         localStorage.setItem('side', JSON.stringify([]))
       }
+    }
+
+    const cardBg = (color) => {
+      if (color.length === 0) {
+        return colors.colorless
+      }
+
+      if (color.length > 1) {
+        return colors.multi
+      }
+
+      if (color.length === 1) {
+      return color[0] === 'W' ? colors.white : 
+             color[0] === 'U' ? colors.blue : 
+             color[0] === 'B' ? colors.black : 
+             color[0] === 'R' ? colors.red : 
+             color[0] === 'G' ? colors.green : colors.colorless}
+    };
+
+    const deckQtd = () => {
+      let qtd = 0
+
+      deck.forEach(card => qtd += card.amount)
+      return qtd
+    }
+
+    const sideQtd = () => {
+      let qtd = 0
+
+      side.forEach(card => qtd += card.amount)
+      return qtd
     }
     
   return (
@@ -68,11 +104,11 @@ function CurrentDeck({showDeck}) {
           )}
         </div>
 
-        <p className="deck-sub">Mainboard</p>
+        <p className="deck-sub">Mainboard {deckQtd()+'/'+60}</p>
         {deck.map((card, index) => (
-              <motion.div index={index} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
+              <motion.div index={index} style={{background: cardBg(card.color)}} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
-                <p>{card.name}</p>
+                <p className='card-name'>{card.name}</p>
                 <div className="controls">
                   <button className="remove-one" onClick={(e) => removeFromDeck(1, index)}>-1</button>
                   <button className="remove-four" onClick={(e) => removeFromDeck(4, index)}>-4</button>
@@ -80,11 +116,11 @@ function CurrentDeck({showDeck}) {
               </motion.div>
           ))}
 
-        <p className="deck-sub-s">Sideboard</p>
+        <p className="deck-sub-s">Sideboard {sideQtd()+'/'+15}</p>
         {side.map((card, index) => (
-              <motion.div index={index} className="card-prev-s" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
+              <motion.div index={index} style={{background: cardBg(card.color)}} className="card-prev-s" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
-                <p>{card.name}</p>
+                <p className='card-name'>{card.name}</p>
                 <div className="controls">
                   <button className="remove-one-s" onClick={(e) => removeFromSide(1, index)}>-1</button>
                   <button className="remove-four-s" onClick={(e) => removeFromSide(4, index)}>-4</button>

@@ -5,6 +5,8 @@ import './search.css'
 import CurrentDeck from '../currentDeck/CurrentDeck'
 import { motion } from 'framer-motion'
 import { RxCardStack } from 'react-icons/rx'
+import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 function Search() {
 
@@ -12,20 +14,21 @@ function Search() {
     const [search, setSearch] = useState('')
 
     const searchCard = async(e) => {
-        e.preventDefault()
-    
-         await axios
+        await axios
           .get(`https://api.scryfall.com/cards/search?q=${search}&include_multilingual=true`)
           .then(res => setCardList(res.data))
           .catch(err => console.log(err))
     
         console.log(cardList)
-        console.log(cardList.data[0].image_uris.normal)
     }
 
-    const {deck, setDeck} = AppConsumer()
-    const {side, setSide} = AppConsumer()
-    const {myDecks, setMyDecks} = AppConsumer()
+    const handleKey = (e) => {
+        if (e.key === 'Enter') {
+            searchCard(search)
+        }
+    }
+
+    const {deck, setDeck, side, setSide, myDecks, setMyDecks} = AppConsumer()
 
     useEffect(() => {
         const deck = JSON.parse(localStorage.getItem('deck'))
@@ -60,11 +63,15 @@ function Search() {
           const newCard = {
             name: cardList.data[index].name,
             image: cardList.data[index].image_uris.normal,
+            bg: cardList.data[index].image_uris.art_crop,
             amount: amount,
-            id: cardList.data[index].id
+            id: cardList.data[index].id,
+            color: cardList.data[index].color_identity,
+            type: cardList.data[index].type_line,
           }
             setDeck([...deck, newCard])
             localStorage.setItem('deck', JSON.stringify([...deck, newCard]))
+            toast.success('Carta adicionada ao deck')
         }
         console.log(deck)
     }
@@ -85,20 +92,22 @@ function Search() {
           const newCard = {
             name: cardList.data[index].name,
             image: cardList.data[index].image_uris.normal,
+            bg: cardList.data[index].image_uris.art_crop,
             amount: amount,
-            id: cardList.data[index].id
+            id: cardList.data[index].id,
+            color: cardList.data[index].color_identity,
+            type: cardList.data[index].type_line,
           }
             setSide([...side, newCard])
             localStorage.setItem('side', JSON.stringify([...side, newCard]))
+            toast.success('Carta adicionada ao sideboard')
         }
         console.log(side)
     }
 
     const [deckModal, setDeckModal] = useState(false)
 
-    const showDeck = () => {
-        (deckModal === false ? setDeckModal(true) : setDeckModal(false))
-    }
+    const showDeck = () => (deckModal === false ? setDeckModal(true) : setDeckModal(false))
 
     const showMyDecks = () => {
         const myDecks = JSON.parse(localStorage.getItem('decks'))
@@ -111,22 +120,26 @@ function Search() {
   return (
     <div className='search-container'>
         <div className="input-wrapper">
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="card-search" />
+            <input type="text" value={search} onKeyDown={handleKey} onChange={(e) => setSearch(e.target.value)} className="card-search" />
             <button onClick={searchCard} className="card-search-button">Buscar</button>
             <div onClick={showDeck} className="show-deck-wrapper">
                 <RxCardStack className='show-deck-btn'/>
                 <p className="show-deck-text">Ver Deck</p>
             </div>
-            <div style={ myDecks.length > 0 ? {display: 'block'} : {display: 'none'} } onClick={showMyDecks} className="show-mydecks-wrapper">
-                <RxCardStack className='show-deck-btn'/>
-                <p className="show-deck-text">Meus Decks</p>
-            </div>
+            <Link to='/decks'>
+                <div style={ myDecks.length > 0 ? {display: 'block'} : {display: 'none'} } onClick={showMyDecks} className="show-mydecks-wrapper">
+                    <RxCardStack className='show-deck-btn'/>
+                    <p className="show-deck-text">Meus Decks</p>
+                </div>
+            </Link>
         </div>
 
-        {deck.length === 0 && side.length === 0 && cardList === '' && (
+        {cardList === '' && (
             <motion.div className="dno-deck-container" initial={{y: 35, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{ duration: 0.8 }}>
                 <div className="no-deck">
-                    <p className="no-deck-text">Seu deck está vazio!<br/> Pesquise um card e adicione ao seu deck!</p>
+                {deck.length === 0 && side.length === 0 ? (
+                    <p className="no-deck-text">Seu deck está vazio!<br/> Pesquise um card e adicione ao seu deck!</p>) : 
+                    (<p className="no-deck-text">Deseja continuar, Planinalta? <br/><br/> Clique em <i>'Ver Deck'</i> e veja seu grimório!</p>)}
                 </div>
             </motion.div>
         )}
