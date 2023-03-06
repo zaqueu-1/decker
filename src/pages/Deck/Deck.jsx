@@ -69,7 +69,7 @@ function Deck() {
       <Background />
       <Header />
       <div className='deck-area'>
-        {creatures ? (
+        {creatures.length > 0 ? (
           <motion.div initial={{y:20, opacity: 0}} animate={{y:0, opacity: 1}} transition={{duration:0.5}} className="card-area">
             <div className="title">
               <h1>Criaturas</h1>
@@ -82,7 +82,7 @@ function Deck() {
           </motion.div>
         ): null}
 
-        {spells? (
+        {spells.length > 0 ? (
           <motion.div initial={{y:20, opacity: 0}} animate={{y:0, opacity: 1}} transition={{duration:0.5}} className="card-area">
             <div className="title">
               <h1>Mágicas</h1>
@@ -95,7 +95,7 @@ function Deck() {
         </motion.div>
         ): null}
 
-        {lands? (
+        {lands.length> 0 ? (
           <motion.div initial={{y:20, opacity: 0}} animate={{y:0, opacity: 1}} transition={{duration:0.5}} className="card-area">
             <div className="title">
               <h1>Terrenos</h1>
@@ -108,9 +108,11 @@ function Deck() {
         </motion.div>
         ): null}
 
-        {side? (
+        {side.length > 0 ? (
           <motion.div initial={{y:20, opacity: 0}} animate={{y:0, opacity: 1}} transition={{duration:0.5}} className="card-area">
-            <h1>Sideboard</h1>
+            <div className="title">
+              <h1>Sideboard</h1>
+            </div>
               <div className="prev-area">
                 {side.map((card, id) => 
                   renderCards(card)
