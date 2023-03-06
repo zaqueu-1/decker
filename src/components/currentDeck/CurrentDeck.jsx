@@ -5,11 +5,10 @@ import { motion } from 'framer-motion'
 import { AiFillCloseSquare } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 
+
 function CurrentDeck({showDeck}) {
 
-    const {deck, setDeck} = AppConsumer()
-    const {side, setSide} = AppConsumer()
-    const {colors} = AppConsumer()
+    const {deck, setDeck, side, setSide, colors} = AppConsumer()
 
     const removeFromDeck = (amount, index) => {
       const updatedDeck = [...deck];
@@ -46,6 +45,7 @@ function CurrentDeck({showDeck}) {
 
       if (deckName) {
         const deckData = {
+          deckId: Math.random(),
           name: deckName,
           mainboard: deck,
           sideboard: side
@@ -94,6 +94,9 @@ function CurrentDeck({showDeck}) {
       side.forEach(card => qtd += card.amount)
       return qtd
     }
+
+    const sortedDeck = deck.sort((a, b) => a.type.localeCompare(b.type))
+    const sortedSide = side.sort((a, b) => a.type.localeCompare(b.type))
     
   return (
     <motion.div initial={{x: 100}} animate={{ x: 0 }} transition={{ duration: 0.4 }} className="deck-container">
@@ -105,8 +108,8 @@ function CurrentDeck({showDeck}) {
         </div>
 
         <p className="deck-sub">Mainboard {deckQtd()+'/'+60}</p>
-        {deck.map((card, index) => (
-              <motion.div index={index} style={{background: cardBg(card.color)}} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
+        {sortedDeck.map((card, index) => (
+              <motion.div style={{background: cardBg(card.color)}} className="card-prev" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
                 <p className='card-name'>{card.name}</p>
                 <div className="controls">
@@ -117,7 +120,7 @@ function CurrentDeck({showDeck}) {
           ))}
 
         <p className="deck-sub-s">Sideboard {sideQtd()+'/'+15}</p>
-        {side.map((card, index) => (
+        {sortedSide.map((card, index) => (
               <motion.div index={index} style={{background: cardBg(card.color)}} className="card-prev-s" initial={{x: 20}} animate={{ x: 0 }} transition={{ duration: 0.3 }}>
                 <p className='amount'>{card.amount}</p>
                 <p className='card-name'>{card.name}</p>

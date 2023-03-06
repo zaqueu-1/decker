@@ -15,7 +15,7 @@ function Search() {
 
     const searchCard = async(e) => {
         await axios
-          .get(`https://api.scryfall.com/cards/search?q=${search}&include_multilingual=true`)
+          .get(`https://api.scryfall.com/cards/search?q=${search}&order=color`)
           .then(res => setCardList(res.data))
           .catch(err => console.log(err))
     
@@ -68,6 +68,7 @@ function Search() {
             id: cardList.data[index].id,
             color: cardList.data[index].color_identity,
             type: cardList.data[index].type_line,
+            cmc: cardList.data[index].cmc
           }
             setDeck([...deck, newCard])
             localStorage.setItem('deck', JSON.stringify([...deck, newCard]))
@@ -97,6 +98,7 @@ function Search() {
             id: cardList.data[index].id,
             color: cardList.data[index].color_identity,
             type: cardList.data[index].type_line,
+            cmc: cardList.data[index].cmc
           }
             setSide([...side, newCard])
             localStorage.setItem('side', JSON.stringify([...side, newCard]))
