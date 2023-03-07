@@ -15,7 +15,7 @@ function Search() {
 
     const searchCard = async(e) => {
         await axios
-          .get(`https://api.scryfall.com/cards/search?q=${search}&order=color`)
+          .get(`https://api.scryfall.com/cards/search?q=${search}&order=color&include_multilingual=true`)
           .then(res => setCardList(res.data))
           .catch(err => console.log(err))
     
