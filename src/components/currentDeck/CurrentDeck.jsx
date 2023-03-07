@@ -46,8 +46,8 @@ function CurrentDeck({showDeck}) {
 
       if (oldDeckId) {
         const deckData = {
-          deckId: oldDeckId.replace(/"/g, ''),
-          name: oldDeckName.replace(/"/g, ''),
+          deckId: oldDeckId,
+          name: oldDeckName,
           mainboard: deck,
           sideboard: side
         }
