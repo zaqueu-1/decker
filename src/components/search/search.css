@@ -15,7 +15,7 @@
 .input-wrapper input {
     height: 2.5rem;
     padding: 0 1.5rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     outline: none;
     border: 2px solid transparent;
     border-radius: 6px;
@@ -23,7 +23,14 @@
     background-color: rgba(220, 220, 220, 0.25);
 }
 
-.card-search-button, .show-deck {
+.deck-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.card-search-button {
     height: 2.5rem;
     padding: 0 1rem;
     font-size: 1.3rem;
@@ -191,3 +198,97 @@
     background-color:#786532;
 }
 
+@media only screen and (max-width: 600px) {
+    .input-wrapper {
+        margin: .5rem auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-search {
+        min-width: 300px;
+        max-width: 350px;
+        width: 90%;
+    }
+
+    .deck-btns {
+        margin: .5rem auto;
+    }
+
+    .card-search-button {
+        display: none;
+    }
+    
+    .show-deck-wrapper, .show-mydecks-wrapper {
+        padding: .35rem;
+    }
+    
+    .show-deck-btn {
+        font-size: 1rem;
+    }
+    
+    .show-deck-text {
+        font-size: .7rem;
+    }
+
+    .no-deck-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+    }
+    
+    .no-deck {
+        width: 95%;
+        padding: 5rem 0;
+    }
+    
+    .no-deck-text {
+        font-size: 1rem;
+    }
+    
+    .card-list {
+        margin: .5rem auto;
+    }
+    
+    .card-img {
+        width: 220px;
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+    
+    .card-search-button {
+        padding: 0 .4rem;
+        font-size: 1rem;
+    }
+    
+    .show-deck-wrapper, .show-mydecks-wrapper {
+        padding: .2rem .4rem;
+    }
+    
+    .show-deck-btn {
+        font-size: 1.2rem;
+    }
+    
+    .no-deck {
+        width: 95%;
+    }
+    
+    .no-deck-text {
+        font-size: 1.3rem; 
+    }
+    
+    .card-img {
+        width: 240px;
+    }
+    
+    .add-one, .add-four {
+        font-size: .9rem;
+    }
+    
+    .add-one-s, .add-four-s {
+        font-size: .9rem;
+    } 
+}

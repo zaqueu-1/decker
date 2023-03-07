@@ -1,7 +1,8 @@
 .deck-container {
-    padding: 0;
     padding: 1rem;
     width: 30vw;
+    min-width: 450px;
+    max-width: 500px;
     height: 100%;
     z-index: 1;
     position: fixed;
@@ -142,4 +143,89 @@
 
 .card-name {
     font-style: italic;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .deck-container {
+        padding: .5rem;
+        width: 80vw;
+        min-width: 0;
+    }
+
+    .save-btn {
+        width: 45%;
+        margin-top: .7rem;
+        font-size: .8rem;
+    }
+    
+    .deck {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 350px;
+        min-width: 350px;
+        margin: 1rem auto -.5rem;
+    }
+    
+    .card-prev, .card-prev-s {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 95%;
+        height: 45px;
+        padding: .7rem 1rem;
+        font-size: 1rem;
+        outline: none;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        margin: 0 auto .25rem;
+        color: white;
+    }
+    
+    .deck-sub, .deck-sub-s {
+        width: 75%;
+    }
+    
+    .remove-one, .remove-four, .remove-one-s, .remove-four-s {
+        padding: .3rem .4rem;
+        font-size: .8rem;
+    }
+    
+    .amount {
+        padding: .2rem .4rem;
+    }
+    
+    .card-name {
+        font-size: .8rem;
+        margin-left: .3rem;
+    }
+}
+
+@media only screen and (min-width:601px) and (max-width:900px) {
+    .deck-container {
+        width: 65vw;
+        max-width: 450px;
+    }
+    
+    .modal-header {
+        margin-bottom: 1rem;
+    }
+
+    .remove-one, .remove-four, .remove-one-s, .remove-four-s {
+        font-size: .8rem;
+    }
+    
+    .amount {
+        font-size: .8rem;
+    }
+    
+    .card-name {
+        font-size: .9rem;
+    }
+
 }

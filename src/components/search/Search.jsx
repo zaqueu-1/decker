@@ -45,6 +45,10 @@ function Search() {
         if (myDecks) {
             setMyDecks(myDecks)
         }
+
+        if (deck || side) {
+            setDeckModal(true)
+        }
     }, [])
 
     const addToDeck = (amount, index) => {
@@ -124,16 +128,18 @@ function Search() {
         <div className="input-wrapper">
             <input type="text" value={search} onKeyDown={handleKey} onChange={(e) => setSearch(e.target.value)} className="card-search" />
             <button onClick={searchCard} className="card-search-button">Buscar</button>
-            <div onClick={showDeck} className="show-deck-wrapper">
-                <RxCardStack className='show-deck-btn'/>
-                <p className="show-deck-text">Ver Deck</p>
-            </div>
-            <Link to='/decks'>
-                <div style={ myDecks.length > 0 ? {display: 'block'} : {display: 'none'} } onClick={showMyDecks} className="show-mydecks-wrapper">
+            <div className="deck-btns">
+                <div onClick={showDeck} className="show-deck-wrapper">
                     <RxCardStack className='show-deck-btn'/>
-                    <p className="show-deck-text">Meus Decks</p>
+                    <p className="show-deck-text">Ver Deck</p>
                 </div>
-            </Link>
+                <Link to='/decks'>
+                    <div style={ myDecks.length > 0 ? {display: 'block'} : {display: 'none'} } onClick={showMyDecks} className="show-mydecks-wrapper">
+                        <RxCardStack className='show-deck-btn'/>
+                        <p className="show-deck-text">Meus Decks</p>
+                    </div>
+                </Link>
+            </div>
         </div>
 
         {cardList === '' && (

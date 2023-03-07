@@ -41,26 +41,55 @@ function CurrentDeck({showDeck}) {
     };
 
     const saveDeck = () => {
-      const deckName = prompt('Nome do deck')
+      const oldDeckId = JSON.parse(localStorage.getItem('deckId'))
+      const oldDeckName = JSON.parse(localStorage.getItem('deckName'))
 
-      if (deckName) {
+      if (oldDeckId) {
         const deckData = {
-          deckId: Math.random(),
-          name: deckName,
+          deckId: oldDeckId.replace(/"/g, ''),
+          name: oldDeckName.replace(/"/g, ''),
           mainboard: deck,
           sideboard: side
         }
 
         const myDecks = JSON.parse(localStorage.getItem('myDecks')) || []
+        const existingDeckIndex = myDecks.findIndex(deck => deck.deckId == oldDeckId)
 
-        myDecks.push(deckData)
+        if (existingDeckIndex > -1) {
+          myDecks[existingDeckIndex] = deckData
+        }
+
         localStorage.setItem('myDecks', JSON.stringify(myDecks))
         toast.success('Deck salvo com sucesso!')
+        
+        localStorage.removeItem('deck')
+        localStorage.removeItem('side')
+        localStorage.removeItem('deckId')
+        localStorage.removeItem('deckName')
+        window.location.href = '/decks'
+      } else {
+        const deckName = prompt('Nome do deck')
 
-        setDeck([])
-        setSide([])
-        localStorage.setItem('deck', JSON.stringify([]))
-        localStorage.setItem('side', JSON.stringify([]))
+        if (deckName) {
+          const deckData = {
+            deckId: Math.random(),
+            name: deckName,
+            mainboard: deck,
+            sideboard: side
+          }
+  
+          const myDecks = JSON.parse(localStorage.getItem('myDecks')) || []
+  
+          myDecks.push(deckData)
+          localStorage.setItem('myDecks', JSON.stringify(myDecks))
+          toast.success('Deck salvo com sucesso!')
+  
+          localStorage.removeItem('deck')
+          localStorage.removeItem('side')
+          localStorage.removeItem('deckId')
+          localStorage.removeItem('deckName')
+          window.location.href = '/decks'
+        }
       }
     }
 

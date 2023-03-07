@@ -34,6 +34,11 @@
     transition: all 0.4s;
 }
 
+.deck:hover {
+    transform: scale(1.04);
+    opacity: 0.8;
+}
+
 .deck::before {
     content: "";
     position: absolute;
@@ -54,3 +59,62 @@
     text-shadow: 3px 3px #000000;
     z-index: 1;
 }
+
+.tools {
+    height: 70px;
+    margin-left: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: .25rem;
+}
+
+.delete-icon, .edit-icon {
+    width: 30px;
+    height: 30px;
+    color: #cf4949;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.edit-icon {
+    color: rgb(57, 131, 201);
+}
+
+.delete-icon:hover, .edit-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 600px) {
+    .decks-container {
+        margin: 1rem 0;
+    }
+    
+    .decks {
+        margin: 0 auto 2rem auto;
+    }
+    
+    .deck {
+        width: 280px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .deck p {
+        font-size: 1.5rem;
+    }
+    
+    .tools {
+        height: 60px;
+        margin-left: .3rem;
+    }
+    
+    .delete-icon, .edit-icon {
+        width: 25px;
+        height: 25px;
+    }
+}
+    
