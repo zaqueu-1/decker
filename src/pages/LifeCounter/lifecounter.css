@@ -1,0 +1,133 @@
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 2rem;
+}
+
+.player1, .player2 {
+    background-color: #7f474795;
+    color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    height: 250px;
+    display: flex;
+    background-image: url(https://cards.scryfall.io/art_crop/front/f/2/f29ba16f-c8fb-42fe-aabf-87089cb214a7.jpg?1673147852);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.player2 {
+    background-image: url(https://cards.scryfall.io/art_crop/front/5/e/5ea82414-3f16-4c8c-8668-1f1ee7566c7b.jpg?1561967361);
+}
+
+.lower-btns, .add-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.life {
+    font-size: 50px;
+    font-weight: bold;
+    width: 50px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #FE7D01;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 12px;
+    max-width: 40px;
+    margin: 4px 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(31, 31, 31);
+    border-radius: 8px;
+    padding: 8px 2px;
+}
+
+.dice-btn, .roll-btn, .reset-btn {
+    background-color: #555555;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 16px;
+    margin: 0 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dice-btn:hover, .roll-btn:hover, .reset-btn:hover {
+    opacity: 0.8;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    background-color: #0000004b;
+    width: 85%;
+    padding: .5rem 0;
+    border-radius: 8px;
+}
+
+.poison-div {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .2rem;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 16px;
+    gap: .5rem;
+    background-color: #0a580adb;
+}
+
+.poison {
+    font-size: 1rem;
+    text-align: center;
+    color: #5ccb33;
+    width: 100px;
+    display: flex;                                                                                             
+    justify-content: center;
+}
+
+.poison-btn {
+    background-color: #438c1f;
+    color: #7bdd83;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.poison-btn:hover {
+    opacity: 0.8;
+}
