@@ -4,6 +4,8 @@ import Header from '../../components/header/Header'
 import './lifecounter.css'
 import { GiPoisonBottle } from 'react-icons/gi'
 import { toast } from 'react-toastify'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 function LifeCounter() {
     const [gameState, setGameState] = useState({
@@ -44,9 +46,8 @@ function LifeCounter() {
         <Background />
         <Header />
 
-        <div className="counter-container">
+        <motion.div initial={{y:20, opacity: 0}} animate={{y:0, opacity: 1}} transition={{duration:0.5}} className="counter-container">
             <div className="player1">
-                
                 <div className="wrapper">
                     <div className="lower-btns">
                         <button onClick={(e) => handleLife(1,1)} className="btn">-1</button>
@@ -89,7 +90,9 @@ function LifeCounter() {
                     <button onClick={(e) => handlePoison(2,-1)} className="poison-btn">+</button>
                 </div>
             </div>
-        </div>
+
+            <Link to='/'><button className='back-btn'>Voltar</button></Link>
+        </motion.div>
     </>
   )
 }
