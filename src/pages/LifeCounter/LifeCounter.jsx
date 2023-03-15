@@ -22,9 +22,17 @@ function LifeCounter() {
       }
       
       const handlePoison = (player, amount) => {
-        setGameState(prev => 
-            (player === 1 ? { ...prev, player1Poison: prev.player1Poison - amount } : { ...prev, player2Poison: prev.player2Poison - amount })
-        )
+        setGameState(prev => {
+            if (player === 1 && prev.player1Poison >= 0 && prev.player1Poison <= 10) {
+                const newPoison = Math.max(0, Math.min(10, prev.player1Poison - amount));
+                return { ...prev, player1Poison: newPoison };
+              } if (player === 2 && prev.player2Poison >= 0 && prev.player2Poison <= 10) {
+                const newPoison = Math.max(0, Math.min(10, prev.player2Poison - amount));
+                return { ...prev, player2Poison: newPoison };
+              } else {
+                return { ...prev };
+              }
+        })
     }
       
         const handleReset = () => {
