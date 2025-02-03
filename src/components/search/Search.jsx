@@ -11,6 +11,8 @@ function Search() {
   const [cardList, setCardList] = useState("")
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const cardsPerPage = 12
 
   const searchCard = async (e) => {
     if (!search.trim()) {
@@ -24,6 +26,7 @@ function Search() {
         `https://api.scryfall.com/cards/search?q=${search}&order=color&include_multilingual=true`,
       )
       setCardList(res.data)
+      setCurrentPage(1) // Reset para primeira página em nova busca
       if (res.data.data.length === 0) {
         toast.info("Nenhuma carta encontrada")
       }
@@ -33,6 +36,21 @@ function Search() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  // Lógica de paginação
+  const indexOfLastCard = currentPage * cardsPerPage
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage
+  const currentCards = cardList.data
+    ? cardList.data.slice(indexOfFirstCard, indexOfLastCard)
+    : []
+  const totalPages = cardList.data
+    ? Math.ceil(cardList.data.length / cardsPerPage)
+    : 0
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleKey = (e) => {
@@ -90,32 +108,53 @@ function Search() {
       )}
 
       <div className='card-list'>
-        {cardList.data &&
-          cardList.data.map((card, index) =>
-            card.image_uris ? (
-              <motion.div
-                initial={{ y: 25, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
-                key={index}
-                className='card'
-              >
-                <img
-                  src={card.image_uris.normal}
-                  className='card-img'
-                  alt={card.name}
-                />
-                <div className='card-info'>
-                  <h3>{card.name}</h3>
-                  <p>{card.type_line}</p>
-                  {card.oracle_text && (
-                    <p className='card-text'>{card.oracle_text}</p>
-                  )}
-                </div>
-              </motion.div>
-            ) : null,
-          )}
+        {currentCards.map((card, index) =>
+          card.image_uris ? (
+            <motion.div
+              initial={{ y: 25, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              key={index}
+              className='card'
+            >
+              <img
+                src={card.image_uris.normal}
+                className='card-img'
+                alt={card.name}
+              />
+              <div className='card-info'>
+                <h3>{card.name}</h3>
+                <p>{card.type_line}</p>
+                {card.oracle_text && (
+                  <p className='card-text'>{card.oracle_text}</p>
+                )}
+              </div>
+            </motion.div>
+          ) : null,
+        )}
       </div>
+
+      {totalPages > 1 && (
+        <div className='pagination'>
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className='pagination-button'
+          >
+            Anterior
+          </button>
+          <span className='page-info'>
+            Página {currentPage} de {totalPages}
+          </span>
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className='pagination-button'
+          >
+            Próxima
+          </button>
+        </div>
+      )}
     </div>
   )
 }
