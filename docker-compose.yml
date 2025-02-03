@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    container_name: decker-dev
+    user: node
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=dev
+    restart: always
+
+  prod:
+    build:
+      context: .
+      target: prod
+    container_name: decker-prod
+    user: node
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=prod
+    restart: always
+
+volumes:
+  node_modules:

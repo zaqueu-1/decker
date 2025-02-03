@@ -1,35 +1,111 @@
-<img src="https://github.com/zaqueu-1/decker/blob/main/github/logo.png" alt="logo">
+# Decker
 
-![React](https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642)
+![React](https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642) ![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
-> Decker é um organizador de grimórios de Magic the Gathering. Construído inteiramente em ReactJS, nele é possível criar, salvar e editar seus decks favoritos consumindo a API do ScryFall.
+> A React-based web application for Magic: The Gathering players that allows searching for cards and tracking life totals during games, using the Scryfall API.
 
-## 🛠️ Ajustes e melhorias
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+## 🚀 Features
 
-- [ ] botão para compartilhar dekcs;
-- [ ] sistema de login;
+### Card Search
 
-## 🚀 Deploy
-https://decker-xi.vercel.app/
+- Search Magic: The Gathering cards using Scryfall API
+- View card images, names, types, and oracle text
+- Responsive grid layout for search results
+- Real-time search with loading states
+- Error handling with toast notifications
 
-## 🖼️ Demonstração
-![demo](https://github.com/zaqueu-1/decker/blob/main/github/demo.gif)
+### Life Counter
 
-## ✍️ Sobre o autor
-Desenvolvedor front-end, 27 anos, Rio de Janeiro/RJ
+- Track life totals for two players
+- Poison counter tracking
+- Dice rolling (D6 and D20)
+- Customizable starting life total
+- Landscape mode support for mobile devices
 
-Apaixonado por compartilhar conhecimento, já atuei como professor, ministrei workshops e fui designer. Essas experiências se converteram em habilidades interpessoais e me tornaram uma pessoa mais habilidosa em compreender o próximo e solucionar problemas com maestria.
+## 🛠️ Technologies
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://media.discordapp.net/attachments/1032819189288816690/1080117613121765406/avatar_def-small.png?width=651&height=651" width="100px;" alt="foto"/><br>
-        <sub>
-          <b><a href="https://zaqueu.tech">Eduardo Zaqueu</a></b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+- React 18
+- React Router v6
+- Axios
+- Framer Motion
+- React Toastify
+- Scryfall API
+
+## 📦 Installation
+
+### Standard Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/zaqueu-1/decker.git
+```
+
+2. Install dependencies
+
+```bash
+cd decker
+npm install
+```
+
+3. Start the development server
+
+```bash
+npm start
+```
+
+### 🐳 Docker Installation
+
+1. Make sure you have Docker and Docker Compose installed
+
+2. Clone the repository and navigate to the project folder
+
+```bash
+git clone https://github.com/zaqueu-1/decker.git
+cd decker
+```
+
+3. Build and run the container
+
+```bash
+docker-compose up --build
+```
+
+The application will be available at `http://localhost:3000`
+
+To stop the container:
+
+```bash
+docker-compose down
+```
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   ├── background/    # Background component
+│   ├── header/        # Header with navigation
+│   └── search/        # Card search functionality
+├── pages/
+│   ├── Home/          # Main search page
+│   └── LifeCounter/   # Life counter page
+└── App.jsx            # Main application component
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 📦 Acknowledgments
+
+- [Scryfall](https://scryfall.com/) for their amazing API
+- [Wizards of the Coast](https://company.wizards.com/) for Magic: The Gathering

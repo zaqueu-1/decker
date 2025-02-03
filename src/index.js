@@ -1,17 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import { AppProvider } from './contexts/deckContext'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import { BrowserRouter } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
-    <AppProvider>
-      <ToastContainer theme='dark' autoClose={1200} />
+    <BrowserRouter>
+      <ToastContainer
+        position='bottom-right'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+      />
       <App />
-    </AppProvider>
-  </React.StrictMode>
-);
-
+    </BrowserRouter>
+  </React.StrictMode>,
+)

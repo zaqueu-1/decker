@@ -1,9 +1,9 @@
-import React from 'react'
-import Background from '../../components/background/Background'
-import Header from '../../components/header/Header'
-import Search from '../../components/search/Search'
+import React from "react"
+import Background from "../../components/background/Background"
+import Header from "../../components/header/Header"
+import Search from "../../components/search/Search"
 
-function Home() {
+const Home = () => {
   return (
     <>
       <Background />
