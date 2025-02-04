@@ -53,25 +53,27 @@
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
+    background-color: transparent;
+    border-radius: 21px;
+    overflow: hidden;
+    transition: transform 0.2s;
 }
 
 .card-img {
   width: 100%;
   height: auto;
   display: block;
+  background-color: transparent;
+  border-radius: 21px;
 }
 
 .card-info {
+    margin-top: .5rem;
+    border-radius: 12px;
   padding: 1rem;
   color: white;
+  background-color: rgba(47, 47, 47, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .card-info h3 {
@@ -92,14 +94,17 @@
 .no-deck-container {
   color: white;
   text-align: center;
-  margin: 4rem 0;
+  padding: 4rem;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 21px;
 }
 
 .life-counter-button {
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 4px;
-  background-color: #d32f2f; /* Vermelho para representar vida */
+  background-color: #d32f2f;
   color: white;
   cursor: pointer;
   transition: all 0.2s;
@@ -107,6 +112,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 1rem;
+  margin-bottom: 2rem;
 }
 
 .life-counter-button:hover {

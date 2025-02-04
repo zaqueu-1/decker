@@ -6,6 +6,7 @@ import { GiPoisonBottle } from "react-icons/gi"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const LifeCounter = () => {
   const [initialVal, setInitialVal] = useState(20)
@@ -16,6 +17,8 @@ const LifeCounter = () => {
     player1Poison: 0,
     player2Poison: 0,
   })
+
+  const { t } = useTranslation()
 
   const handleLife = (player, amount) => {
     setGameState((prev) =>
@@ -109,7 +112,7 @@ const LifeCounter = () => {
               -
             </button>
             <span className='poison'>
-              <GiPoisonBottle /> Veneno: {gameState.player1Poison}
+              <GiPoisonBottle /> {t("lifeCounter.poison")}: {gameState.player1Poison}
             </span>
             <button onClick={(e) => handlePoison(1, -1)} className='poison-btn'>
               +
@@ -119,16 +122,16 @@ const LifeCounter = () => {
 
         <div className='addons'>
           <button onClick={(e) => rollDice(6)} className='dice-btn'>
-            Rolar D6
+            {t("lifeCounter.roll")} D6
           </button>
           <button onClick={(e) => rollDice(20)} className='dice-btn'>
-            Rolar D20
+            {t("lifeCounter.roll")} D20
           </button>
           <button
             onClick={(e) => setShowInitialInput(!showInitialInput)}
             className='life-btn'
           >
-            Alterar Vida
+            {t("lifeCounter.changeLife")}
           </button>
           <button onClick={(e) => handleReset()} className='reset-btn'>
             Reset
@@ -166,17 +169,13 @@ const LifeCounter = () => {
               -
             </button>
             <span className='poison'>
-              <GiPoisonBottle /> Veneno: {gameState.player2Poison}
+              <GiPoisonBottle /> {t("lifeCounter.poison")}: {gameState.player2Poison}
             </span>
             <button onClick={(e) => handlePoison(2, -1)} className='poison-btn'>
               +
             </button>
           </div>
         </div>
-
-        <Link to='/'>
-          <button className='back-btn'>Voltar</button>
-        </Link>
       </motion.div>
 
       {showInitialInput && (

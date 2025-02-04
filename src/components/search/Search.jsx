@@ -4,9 +4,10 @@ import axios from "axios"
 import "./search.css"
 import { motion } from "framer-motion"
 import { toast } from "react-toastify"
-import { GiHearts } from "react-icons/gi"
+import { useTranslation } from "react-i18next"
 
 function Search() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [cardList, setCardList] = useState("")
   const [search, setSearch] = useState("")
@@ -26,7 +27,7 @@ function Search() {
         `https://api.scryfall.com/cards/search?q=${search}&order=color&include_multilingual=true`,
       )
       setCardList(res.data)
-      setCurrentPage(1) // Reset para primeira página em nova busca
+      setCurrentPage(1) 
       if (res.data.data.length === 0) {
         toast.info("Nenhuma carta encontrada")
       }
@@ -38,7 +39,6 @@ function Search() {
     }
   }
 
-  // Lógica de paginação
   const indexOfLastCard = currentPage * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
   const currentCards = cardList.data
@@ -68,18 +68,18 @@ function Search() {
           onKeyDown={handleKey}
           onChange={(e) => setSearch(e.target.value)}
           className='card-search'
-          placeholder='Digite o nome da carta...'
+          placeholder={t("search.placeholder")}
         />
         <button onClick={searchCard} className='card-search-button'>
-          Buscar
+          {t("search.button")}
         </button>
-        <button
+      </div>
+      <button
           onClick={() => navigate("/life")}
           className='life-counter-button'
         >
-          <GiHearts /> Contador
+            {t("search.counter")}
         </button>
-      </div>
 
       {isLoading && (
         <motion.div
@@ -88,7 +88,7 @@ function Search() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <p>Carregando cartas...</p>
+          <p>{t("search.loading")}</p>
         </motion.div>
       )}
 
@@ -100,9 +100,7 @@ function Search() {
           transition={{ duration: 0.8 }}
         >
           <div className='no-deck'>
-            <p className='no-deck-text'>
-              Digite o nome de uma carta para pesquisar!
-            </p>
+            <p>{t("search.empty")}</p>
           </div>
         </motion.div>
       )}
@@ -141,17 +139,17 @@ function Search() {
             disabled={currentPage === 1}
             className='pagination-button'
           >
-            Anterior
+            {t("pagination.previous")}
           </button>
           <span className='page-info'>
-            Página {currentPage} de {totalPages}
+            {t("pagination.page", { current: currentPage, total: totalPages })}
           </span>
           <button
             onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
             className='pagination-button'
           >
-            Próxima
+            {t("pagination.next")}
           </button>
         </div>
       )}

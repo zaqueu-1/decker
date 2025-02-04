@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import LifeCounter from "./pages/LifeCounter/LifeCounter"
+import "./i18n"
 
 const App = () => {
   return (
