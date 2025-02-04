@@ -22,6 +22,14 @@
 - Customizable starting life total
 - Landscape mode support for mobile devices
 
+### Internationalization
+
+- Multi-language support (English and Portuguese)
+- Automatic language detection
+- Language persistence
+- Easy language switching with flag icons
+- Full translation coverage for all app content
+
 ## 🛠️ Technologies
 
 - React 18
@@ -30,6 +38,9 @@
 - Framer Motion
 - React Toastify
 - Scryfall API
+- i18next
+- react-i18next
+- i18next-browser-languagedetector
 
 ## 📦 Installation
 
@@ -90,8 +101,33 @@ src/
 ├── pages/
 │   ├── Home/          # Main search page
 │   └── LifeCounter/   # Life counter page
+├── i18n.js           # Internationalization configuration
 └── App.jsx            # Main application component
 ```
+
+## 🌐 Internationalization
+
+The app uses i18next for internationalization with the following features:
+
+- **Supported Languages:**
+
+  - English (default)
+  - Portuguese
+
+- **Auto Detection:**
+
+  - Automatically detects user's preferred language
+  - Falls back to English if preferred language is not supported
+
+- **Language Persistence:**
+
+  - Saves language preference to localStorage
+  - Maintains selected language across sessions
+
+- **Easy Integration:**
+  - Uses react-i18next hooks for component translation
+  - Supports interpolation for dynamic content
+  - Handles pluralization and formatting
 
 ## 🤝 Contributing
 
